@@ -1,0 +1,211 @@
+{% extends 'template.html' %}
+{% load static %}
+
+{% block title %} Pemerhatian Audit {% endblock title %}
+
+{% block content %}
+<!-- CSS -->
+<link rel="stylesheet" href="{% static 'css/audit.css' %}">
+
+<section class="split left">
+    <div class="header">
+        <div>Selamat Datang</div>
+        <div>{{ username }} <img src="{% static 'image/assignment_ind_black_24dp.svg' %}" alt=""></div>
+    </div>
+
+    <div class="content">
+        <!-- <div><a href="{% url 'riskAssessment' %}">Penilaian Risiko</a></div> -->
+        <div><a href="{% url 'praAudit' %}">Pra Audit</a></div>
+        <div><a href="{% url 'planMenu' %}">Perancangan Tahunan Audit</a></div>
+        <!-- <div><a href="{% url 'pelaksanaan' %}">Pelaksanaan Audit</a></div> -->
+        <div><a href="{% url 'inquiryMenu' %}">Pemerhatian Audit</a></div>
+        <div><a href="{% url 'responseMenu' %}">Maklumbalas Audit</a></div>
+        <div><a href="{% url 'susulanMenu' %}">Audit Susulan</a></div>
+    </div>
+
+    <div class="footer">
+        <div><a href="{% url 'access' %}">Log keluar</a></div>
+    </div>
+</section>
+
+<section class="split right">
+    <!-- <div><a href="{% url 'MEMO' %}"><img src="{% static 'image/mail_FILL0_wght400_GRAD0_opsz48.svg' %}" alt=""></a></div> -->
+    
+    <h1>Pemerhatian Audit</h1>
+
+    <form method="post" ref="form">
+        {% csrf_token %}
+        <div>Kod :</div>
+        <div><input type="text" name="code" ref="code" value="{{ code }}" readonly></div>
+        <div>Perancangan Audit :</div>
+        <div><input type="text" name="plan" v-model="plan" readonly></div>
+        <div>Jenis Audit :</div>
+        <div><input type="text" name="type" v-model="type" readonly></div>
+        <div>Program Pengauditan :</div>
+        <div><input type="text" name="pengauditan" v-model="element" readonly></div>
+        <div>Elemen Kawalan :</div>
+        <div><input type="text" name="elemen" v-model="elemen" readonly></div>
+        <!-- <div>Indikator :</div>
+        <div><input type="text" name="indicator" v-model="indicator" readonly></div>
+        <div>Sub-Indikator :</div>
+        <div><input type="text" name="subIndicator" v-model="subIndicator" readonly></div> -->
+        <div>Juruaudit :</div>
+        <div><input type="text" name="auditor" v-model="auditor" readonly></div>
+        <div>Dokumen :</div>
+        <div><input type="file" name="att"></div>
+        <div>Senarai Semak :</div>
+        <div>
+            <select id="senaraiSemak" v-on:click="selectKriteria">
+                {% for key in kriteria %}
+                <option value="{{ key.criteria }}">{{ key.criteria }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div v-show="false"><input type="text" name="criteria" ref="criteria" readonly></div>
+        <div v-show="false"><input type="text" name="status" ref="status" readonly></div>
+        <div v-show="false"><input type="text" name="catatan" ref="catatan" readonly></div>
+        <!-- <div>Reply :</div>
+        <div><input type="text" name="reply"></div>
+        <div>Remarks :</div>
+        <div><input type="text" name="remarks"></div> -->
+    </form>
+
+    <table style="width: 30%; margin: auto; cursor:pointer;">
+        <tr>
+            <!-- <td v-on:click="addKriteria">Tambah Data</td> -->
+            <td v-show="a" v-on:click="toggle">Prosedur</td>
+            <td v-show="!a" v-on:click="toggle">Prosedur</td>
+            <td v-on:click="reset">Padam</td>
+        </tr>
+    </table>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Senarai Semak</th>
+                <th>Markah</th>
+                <th>Prosedur</th>
+                <th>Ya/Tidak</th>
+                <th>Catatan</th>
+                <th>Form</th>
+            </tr>
+        </thead>
+        <tbody class="Kriteria">
+            <tr id="Kriteria 1" v-on:click="getNum(1)">
+                <td style="cursor:pointer;"></td>
+                <td style="width: 5%;"></td>
+                <td></td>
+                <td>
+                    <input type="radio" name="status 1" id="yes" value="yes">
+                    <label for="yes">Ya</label>
+                    <input type="radio" name="status 1" id="no" value="no">
+                    <label for="no">Tidak</label>
+                </td>
+                <td><input type="text"></td>
+                <td><a href="https://1drv.ms/x/s!AlYqlCxLzsXahBTC1FoGkL2Nttyg?e=X3sC5D" target="_blank">Kriteria 1</a></td>
+            </tr>
+            <tr id="Kriteria 2" v-on:click="getNum(2)">
+                <td style="cursor:pointer;"></td>
+                <td style="width: 5%;"></td>
+                <td></td>
+                <td>
+                    <input type="radio" name="status 2" id="yes" value="yes">
+                    <label for="yes">Ya</label>
+                    <input type="radio" name="status 2" id="no" value="no">
+                    <label for="no">Tidak</label>
+                </td>
+                <td><input type="text"></td>
+                <td><a href="https://1drv.ms/x/s!AlYqlCxLzsXahBTC1FoGkL2Nttyg?e=X3sC5D" target="_blank">Kriteria 2</a></td>
+            </tr>
+            <tr id="Kriteria 3" v-on:click="getNum(3)">
+                <td style="cursor:pointer;"></td>
+                <td style="width: 5%;"></td>
+                <td></td>
+                <td>
+                    <input type="radio" name="status 3" id="yes" value="yes">
+                    <label for="yes">Ya</label>
+                    <input type="radio" name="status 3" id="no" value="no">
+                    <label for="no">Tidak</label>
+                </td>
+                <td><input type="text"></td>
+                <td><a href="https://1drv.ms/x/s!AlYqlCxLzsXahBb30G7uMY64Pyuz?e=HbOsSq" target="_blank">Kriteria 3</a></td>
+            </tr>
+            <tr id="Kriteria 4" v-on:click="getNum(4)">
+                <td style="cursor:pointer;"></td>
+                <td style="width: 5%;"></td>
+                <td></td>
+                <td>
+                    <input type="radio" name="status 4" id="yes" value="yes">
+                    <label for="yes">Ya</label>
+                    <input type="radio" name="status 4" id="no" value="no">
+                    <label for="no">Tidak</label>
+                </td>
+                <td><input type="text"></td>
+                <td><a href="https://1drv.ms/x/s!AlYqlCxLzsXahBi461dMuhzZMrfo?e=HS6WMI" target="_blank">Kriteria 4</a></td>
+            </tr>
+            <tr id="Kriteria 5" v-on:click="getNum(5)">
+                <td style="cursor:pointer;"></td>
+                <td style="width: 5%;"></td>
+                <td></td>
+                <td>
+                    <input type="radio" name="status 5" id="yes" value="yes">
+                    <label for="yes">Ya</label>
+                    <input type="radio" name="status 5" id="no" value="no">
+                    <label for="no">Tidak</label>
+                </td>
+                <td><input type="text"></td>
+                <td><a href="https://1drv.ms/x/s!AlYqlCxLzsXahBpz_aW-dCEMDPNE?e=Ablas3" target="_blank">Kriteria 5</a></td>
+            </tr>
+            <tr id="Kriteria 6" v-on:click="getNum(6)">
+                <td style="cursor:pointer;"></td>
+                <td style="width: 5%;"></td>
+                <td></td>
+                <td>
+                    <input type="radio" name="status 6" id="yes" value="yes">
+                    <label for="yes">Ya</label>
+                    <input type="radio" name="status 6" id="no" value="no">
+                    <label for="no">Tidak</label>
+                </td>
+                <td><input type="text"></td>
+                <td><a href="https://1drv.ms/x/s!AlYqlCxLzsXahBweGjj6v8bROd2w?e=kmbSZc" target="_blank">Kriteria 6</a></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div><button type="submit" v-on:click="OnSubmit">Simpan</button></div>
+    <br><br>
+
+    <table v-show="false">
+        {% for key in log %}
+        <tbody class="log">
+            <tr id="{{ key.code }}">
+                <td>{{ key.code }}</td>
+                <td>{{ key.plan }}</td>
+                <td>{{ key.type }}</td>
+                <td>{{ key.pengauditan }}</td>
+                <td>{{ key.elemen }}</td>
+                <td>{{ key.subIndicator }}</td>
+                <td>{{ key.auditor }}</td>
+                <td>{{ key.criteria }}</td>
+                <td>{{ key.status }}</td>
+            </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+
+    <table v-show="false">
+        {% for key in kriteria %}
+        <tbody>
+            <tr class="{{ key.criteria }}">
+                <td>{{ key.criteria }}</td>
+                <td>{{ key.mark }}</td>
+                <td>{{ key.prosedur }}</td>
+            </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+</section>
+
+<!-- Import App -->
+<script src="{% static 'javascript/inquiry.js' %}"></script>
+{% endblock content %}

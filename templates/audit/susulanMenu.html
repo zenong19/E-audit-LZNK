@@ -1,0 +1,67 @@
+{% extends 'template.html' %}
+{% load static %}
+
+{% block title %} Maklumbalas Audit {% endblock title %}
+
+{% block content %}
+<!-- CSS -->
+<link rel="stylesheet" href="{% static 'css/audit.css' %}">
+
+<section class="split left">
+    <div class="header">
+        <div>Selamat Datang</div>
+        <div>{{ username }} <img src="{% static 'image/assignment_ind_black_24dp.svg' %}" alt=""></div>
+    </div>
+
+    <div class="content">
+        <!-- <div><a href="{% url 'riskAssessment' %}">Penilaian Risiko</a></div> -->
+        <div><a href="{% url 'praAudit' %}">Pra Audit</a></div>
+        <div><a href="{% url 'planMenu' %}">Perancangan Tahunan Audit</a></div>
+        <!-- <div><a href="{% url 'pelaksanaan' %}">Pelaksanaan Audit</a></div> -->
+        <div><a href="{% url 'inquiryMenu' %}">Pemerhatian Audit</a></div>
+        <div><a href="{% url 'responseMenu' %}">Maklumbalas Audit</a></div>
+        <div class="highlight">Audit Susulan</div>
+    </div>
+
+    <div class="footer">
+        <div><a href="{% url 'access' %}">Log keluar</a></div>
+    </div>
+</section>
+
+<section class="split right">
+    <h1>Audit Susulan</h1>
+
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Kod</th>
+                    <th>Jenis Audit</th>
+                    <th>Perancangan Audit</th>
+                    <th>Program Pengauditan</th>
+                    <!-- <th>Indikator</th>
+                    <th>Sub-Indikator</th> -->
+                    <th>Juruaudit</th>
+                    <th>Kemaskini</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for key in log %}
+                <tr>
+                    <td>{{ key.code }}</td>
+                    <td>{{ key.type }}</td>
+                    <td>{{ key.plan }}</td>
+                    <td>{{ key.pengauditan }}</td>
+                    <!-- <td>{{ key.indicator }}</td>
+                    <td>{{ key.subIndicator }}</td> -->
+                    <td>{{ key.auditor }}</td>
+                    <td><a href="{% url 'susulan' key.code %}">Edit</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    
+    
+</section>
+{% endblock content %}

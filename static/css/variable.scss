@@ -1,0 +1,40 @@
+// Variables
+$font : 'Exo', sans-serif;
+$colour : #006614;
+$highlight : rgb(20, 204, 171);
+$button_color : rgb(69, 69, 69);
+
+// Mixins
+@mixin gridMiddle {
+    display: grid;
+    justify-items: center;
+}
+
+@mixin inputBox {
+    background: #FFFFFF;
+    border: 1px solid #454545;
+    box-sizing: border-box;
+    border-radius: 25px;
+}
+
+@mixin buttonBox {
+    color: white;
+    background-color: $button_color;
+    border-radius: 30px;
+}
+
+@mixin tableDesign {
+    font-family: $font;
+    font-size: 14px;
+    text-align: center;
+
+    th, td {
+        padding: 15px;
+    }
+
+    tbody {
+        tr:nth-child(odd) {
+            background-color: #D6EEEE;
+        }
+    }
+}

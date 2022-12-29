@@ -1,0 +1,116 @@
+.split {
+  height: 100%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+.left {
+  width: 25%;
+  left: 0;
+  background-color: #006614;
+  color: rgb(255, 255, 255);
+}
+.left img {
+  width: 60px;
+}
+.left div {
+  font-family: "Exo", sans-serif;
+  font-size: 40px;
+}
+.left .header {
+  width: 25%;
+  position: fixed;
+  top: 10px;
+  border-bottom: 3px solid white;
+}
+.left .header div {
+  display: flex;
+  justify-content: center;
+}
+.left .content {
+  display: grid;
+  justify-items: center;
+  margin: 3em 0;
+}
+.left .content div {
+  font-size: 25px;
+  margin: 10px 0;
+}
+.left .content div a {
+  text-decoration: none;
+  color: rgb(255, 255, 255);
+}
+.left .content .highlight {
+  color: white;
+  background-color: rgb(69, 69, 69);
+  border-radius: 30px;
+  background-color: rgb(20, 204, 171);
+  padding-left: 1em;
+  padding-right: 1em;
+}
+.left .footer {
+  width: 25%;
+  position: fixed;
+  bottom: 10px;
+}
+.left .footer div {
+  display: flex;
+  justify-content: center;
+}
+.left .footer div a {
+  color: white;
+  background-color: rgb(69, 69, 69);
+  border-radius: 30px;
+  text-decoration: none;
+  color: rgb(255, 255, 255);
+  font-size: 30px;
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+.right {
+  width: 75%;
+  right: 0;
+  background-color: white;
+}
+.right div {
+  display: grid;
+  justify-items: center;
+  width: 75%;
+  margin: auto;
+}
+.right div select {
+  background: #FFFFFF;
+  border: 1px solid #454545;
+  box-sizing: border-box;
+  border-radius: 25px;
+  text-align: center;
+  font-size: 30px;
+  width: 500px;
+  height: 40px;
+  border-radius: 30px;
+  margin: 15px 0px;
+}
+.right div button {
+  color: white;
+  background-color: rgb(69, 69, 69);
+  border-radius: 30px;
+  font-family: "Exo", sans-serif;
+  font-size: 36px;
+  padding-left: 1em;
+  padding-right: 1em;
+  margin: 15px 0px;
+}
+.right table, .right td, .right th {
+  border: 1px solid;
+  text-align: center;
+  padding: 5px;
+}
+.right table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 15px 0px;
+}/*# sourceMappingURL=management.css.map */

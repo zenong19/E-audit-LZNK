@@ -1,0 +1,33 @@
+{% extends 'template.html' %}
+{% load static %}
+
+<!-- <script src="{% static 'javascript/graph.js' %}"></script> -->
+
+{% block title %} Pemerhatian Audit {% endblock title %}
+
+{% block content %}
+<!-- CSS -->
+<link rel="stylesheet" href="{% static 'css/management.css' %}">
+
+<section class="split left">
+    <div class="header">
+        <div>Selamat Datang</div>
+        <div>{{ username }} <img src="{% static 'image/assignment_ind_black_24dp.svg' %}" alt=""></div>
+    </div>
+
+    <div class="content">
+        <div class="highlight">Report</div>
+    </div>
+
+    <div class="footer">
+        <div><a href="{% url 'access' %}">Log keluar</a></div>
+    </div>
+</section>
+
+<section class="split right">
+    <form action="" method="post">
+        <label for="tahun">Tahun</label>
+        <input type="text" id="tahun" name="tahun">
+    </form>
+</section>
+{% endblock content %}

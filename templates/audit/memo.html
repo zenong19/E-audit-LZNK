@@ -1,0 +1,67 @@
+{% extends 'template.html' %}
+{% load static %}
+
+{% block title %} Penilaian Risiko {% endblock title %}
+
+{% block content %}
+<!-- CSS -->
+<link rel="stylesheet" href="{% static 'css/audit.css' %}">
+
+<section class="split left">
+    <div class="header">
+        <div>Selamat Datang</div>
+        <div>{{ username }} <img src="{% static 'image/assignment_ind_black_24dp.svg' %}" alt=""></div>
+    </div>
+
+    <div class="content">
+        <!-- <div><a href="{% url 'planMenu' %}">Perancangan Tahunan Audit</a></div>
+        <div><a href="{% url 'plan' %}">Perancangan Audit</a></div>
+        <div><a href="{% url 'pelaksanaan' %}">Pelaksanaan Audit</a></div>
+        <div><a href="{% url 'inquiryMenu' %}">Pemerhatian Audit</a></div>
+        <div><a href="{% url 'responseMenu' %}">Maklumbalas Audit</a></div>
+        <div><a href="{% url 'praAudit' %}">Pra Audit</a></div>
+        <div><a href="{% url 'riskAssessment' %}">Penilaian Risiko</a></div> -->
+        <div class="highlight">Send MEMO</a></div>
+    </div>
+
+    <div class="footer">
+        <div><a href="{% url 'planMenu' %}">Kembali</a></div>
+    </div>
+</section>
+
+<section class="split right">
+    <h1>Penghantaran MEMO</h1>
+
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Select</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for key in log %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ key.username }}</td>
+                    <td>{{ key.email }}</td>
+                    <td><input type="checkbox" value="{{ key.email }}"></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <form action="mailto:someone@example.com" method="post" id="myform">
+        <!-- {% csrf_token %} -->
+    </form>
+    <br>
+    <div><button type="submit" v-on:click="sendMemo">Hantar</button></div>
+</section>
+
+<!-- Import App -->
+<script src="{% static 'javascript/memo.js' %}"></script>
+{% endblock content %}

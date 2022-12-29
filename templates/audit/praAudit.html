@@ -1,0 +1,76 @@
+{% extends 'template.html' %}
+{% load static %}
+
+{% block title %} Pra Audit {% endblock title %}
+
+{% block content %}
+<!-- CSS -->
+<link rel="stylesheet" href="{% static 'css/audit.css' %}">
+
+<section class="split left">
+    <div class="header">
+        <div>Selamat Datang</div>
+        <div>{{ username }} <img src="{% static 'image/assignment_ind_black_24dp.svg' %}" alt=""></div>
+    </div>
+
+    <div class="content">
+        <!-- <div><a href="{% url 'riskAssessment' %}">Penilaian Risiko</a></div> -->
+        <div class="highlight">Pra Audit</div>
+        <div><a href="{% url 'planMenu' %}">Perancangan Tahunan Audit</a></div>
+        <!-- <div><a href="{% url 'pelaksanaan' %}">Pelaksanaan Audit</a></div> -->
+        <div><a href="{% url 'inquiryMenu' %}">Pemerhatian Audit</a></div>
+        <div><a href="{% url 'responseMenu' %}">Maklumbalas Audit</a></div>
+        <div><a href="{% url 'susulanMenu' %}">Audit Susulan</a></div>
+    </div>
+
+    <div class="footer">
+        <div><a href="{% url 'access' %}">Log keluar</a></div>
+    </div>
+</section>
+
+<section class="split right">
+    <h1>Pra Audit</h1>
+
+    <!-- <div><input type="search" v-model="date" placeholder="Year" style="text-align: center;"></div> -->
+    <div>
+        <select name="date" id="date" v-model="date">
+            <option v-for="date in dates" value="[[ date ]]">[[ date ]]</option>
+        </select>
+    </div>
+
+<br>
+    <div><input type="submit" value="Hantar" v-on:click="searchDate"></div>
+
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Tahun</th>
+                    <th>Ketua Juruaudit</th>
+                    <th>Perancangan Audit</th>
+                    <!-- <th>Elemen Kawalan</th> -->
+                    <th>Indikator</th>
+                    <th>Sub-Indikator</th>
+                    <th>Keputusan</th>
+                </tr>
+            </thead>
+            {% for key in log %}
+            <tbody class="log">
+                <tr id="{{ key.code }}">
+                    <td>{{ key.date }}</td>
+                    <td>{{ key.staff }}</td>
+                    <td>{{ key.programme }}</td>
+                    <!-- <td>{{ key.element }}</td> -->
+                    <td>{{ key.indicator }}</td>
+                    <td>{{ key.subIndicator }}</td>
+                    <td>{{ key.outcome }}</td>
+                </tr>
+            </tbody>
+            {% endfor %}
+        </table>
+    </div>
+</section>
+
+<!-- Import App -->
+<script src="{% static 'javascript/praAudit.js' %}"></script>
+{% endblock content %}

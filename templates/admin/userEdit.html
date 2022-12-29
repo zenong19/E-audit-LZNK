@@ -1,0 +1,88 @@
+{% extends 'template.html' %}
+{% load static %}
+
+{% block title %} User Setup {% endblock title %}
+
+{% block content %}
+<!-- CSS -->
+<link rel="stylesheet" href="{% static 'css/admin.css' %}">
+
+<section class="split left">
+    <div class="header">
+        <div>Selamat Datang</div>
+        <div>{{ username }} <img src="{% static 'image/assignment_ind_black_24dp.svg' %}" alt=""></div>
+    </div>
+
+
+    <div class="content">
+        <div class="highlight">Daftar Pengguna</div>
+        <div><a href="{% url 'reviewAccess' %}">Akses Pengguna</a></div>
+    </div>
+
+    <div class="footer">
+        <div><a href="{% url 'access' %}">Log keluar</a></div>
+    </div>
+</section>
+
+<section class="split right">
+    <h1>Daftar Pengguna</h1>
+    
+    <form method="post" ref="form">
+        {% csrf_token %}
+        <div>UserID :</div>
+        <div><input type="text" name="userid" ref="userid" v-model="userid"></div>
+        <div>Nama :</div>
+        <div><input type="text" name="username" ref="username" v-model="username"></div>
+        <div>Kata laluan :</div>
+        <div><input type="text" name="password" v-model="password"></div>
+        <div>Jantina :</div>
+        <div>
+            <select name="gender" v-model="gender">
+                <option value="male" selected>Male</option>
+                <option value="female">Female</option>
+            </select>
+        </div>
+        <div>E-mel :</div>
+        <div><input type="email" name="email" v-model="email"></div>
+        <div>Nombor telefon :</div>
+        <div><input type="tel" name="contact" v-model="contact"></div>
+        <div>Access :</div>
+        <div></div>
+        <div><input type="checkbox" id="access1" name="access1" value="admin"></div>
+        <div><label for="access1"> Admin</label></div>
+        <div><input type="checkbox" id="access2" name="access2" value="audit"></div>
+        <div><label for="access2"> Audit</label></div>
+        <div><input type="checkbox" id="access3" name="access3" value="management"></div>
+        <div><label for="access3"> Management</label></div>
+        <div><input type="checkbox" id="access4" name="access4" value="setup"></div>
+        <div><label for="access4"> Setup</label></div>
+        <div>Tarikh daftar :</div>
+        <div><input type="date" name="date" v-model="date"></div>
+    </form>
+
+    <div><button type="submit" v-on:click="OnSubmit">Simpan</button></div><br><br>
+
+    <table v-show="false">
+        {% for key in log %}
+        <tbody class="log">
+            <tr id="{{ key.username }}">
+                <td>{{ key.userid }}</td>
+                <td>{{ key.password }}</td>
+                <td>{{ key.gender }}</td>
+                <td>{{ key.email }}</td>
+                <td>{{ key.contact }}</td>
+                <td>{{ key.access1 }}</td>
+                <td>{{ key.access2 }}</td>
+                <td>{{ key.access3 }}</td>
+                <td>{{ key.access4 }}</td>
+                <td>{{ key.date }}</td>
+            </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+    <kbd id="name">{{ name }}</kbd>
+</section>
+
+<!-- Import App -->
+<script src="{% static 'javascript/admin.js' %}"></script>
+{% endblock content %}

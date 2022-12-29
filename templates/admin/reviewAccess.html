@@ -1,0 +1,64 @@
+{% extends 'template.html' %}
+{% load static %}
+
+{% block title %} Review Access {% endblock title %}
+
+{% block content %}
+<!-- CSS -->
+<link rel="stylesheet" href="{% static 'css/admin.css' %}">
+
+<section class="split left">
+    <div class="header">
+        <div>Selamat Datang</div>
+        <div>{{ username }} <img src="{% static 'image/assignment_ind_black_24dp.svg' %}" alt=""></div>
+    </div>
+
+    <div class="content">
+        <div><a href="{% url 'userSetup' %}">Daftar Pengguna</a></div>
+        <div class="highlight">Akses Pengguna</div>
+    </div>
+
+    <div class="footer">
+        <div><a href="{% url 'access' %}">Log keluar</a></div>
+    </div>
+</section>
+
+<section class="split right">
+    <h1>Akses Pengguna</h1>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>No.</th>
+                <th class="username">Username</th>
+                <th>Access</th>
+                <th class="bin"></th>
+                <th class="bin"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for key in log %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td class="username">{{ key.username }}</td>
+                <td>{{ key.access1 }} {{ key.access2 }} {{ key.access3 }} {{ key.access4 }}</td>
+                <td class="bin">
+                    <button><a href="{% url 'userEdit' key.username %}"><img src="{% static 'image/edit_black_24dp.svg' %}" alt=""></a></button>
+                </td>
+                <td class="bin">
+                    <form method="post" ref="form">
+                        {% csrf_token %}
+                        <button name="username" value="{{ key.username }}" v-on:click="OnDelete"><img src="{% static 'image/delete_black_24dp.svg' %}" alt=""></button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    
+</section>
+
+<!-- Import App -->
+<script src="{% static 'javascript/admin.js' %}"></script>
+{% endblock content %}

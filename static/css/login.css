@@ -1,0 +1,85 @@
+.split {
+  height: 100%;
+  width: 50%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+.left {
+  left: 0;
+  top: 25%;
+  background-image: linear-gradient(white, #006614);
+}
+.left img {
+  width: 500px;
+}
+.left div {
+  font-family: "Exo", sans-serif;
+  font-size: 72px;
+  display: grid;
+  justify-items: center;
+}
+
+.right {
+  right: 0;
+  top: 20%;
+  background-color: white;
+}
+.right div {
+  margin: 20px 0;
+  font-family: "Exo", sans-serif;
+  font-size: 48px;
+  display: grid;
+  justify-items: center;
+}
+.right div input {
+  font-size: 48px;
+  width: 426px;
+  height: 56px;
+  padding-left: 1em;
+  padding-right: 1em;
+  background: #FFFFFF;
+  border: 1px solid #454545;
+  box-sizing: border-box;
+  border-radius: 25px;
+  text-align: center;
+}
+.right div select {
+  background: #FFFFFF;
+  border: 1px solid #454545;
+  box-sizing: border-box;
+  border-radius: 25px;
+  font-size: 30px;
+  width: 300px;
+  height: 40px;
+  border: 3px solid #006633;
+  box-sizing: border-box;
+  border-radius: 30px;
+}
+.right div select option {
+  text-align: center;
+}
+.right div button {
+  font-size: 24px;
+  padding-left: 1em;
+  padding-right: 1em;
+  color: white;
+  background-color: rgb(69, 69, 69);
+  border-radius: 30px;
+}
+.right div a {
+  font-size: 24px;
+  text-decoration: none;
+  padding-left: 1em;
+  padding-right: 1em;
+  color: white;
+  background-color: rgb(69, 69, 69);
+  border-radius: 30px;
+  background-color: #006614;
+}
+.right div kbd {
+  font-size: 24px;
+}/*# sourceMappingURL=login.css.map */

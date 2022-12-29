@@ -1,0 +1,48 @@
+{% extends 'template.html' %}
+{% load static %}
+
+{% block title %} Login {% endblock title %}
+
+{% block content %}
+<!-- CSS -->
+<link rel="stylesheet" href="{% static 'css/login.css' %}">
+
+<section class="split left">
+    <div>
+        <img src="{% static 'image/Logo-Zakat-Kedah-Baru-2021.png' %}" alt="">
+    </div>
+    <div>Sistem E-Audit</div>
+</section>
+
+<section class="split right">
+    <form method="post">
+        {% csrf_token %}
+        <div>Akses :</div>
+        <div>
+            <select name="access" id="access">
+                {% for key in log %}
+                <option value="{{ key }}">{{ key }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div>
+            <button type="submit">Log masuk</button>
+        </div>
+        <div>
+            <kbd>--- atau ---</kbd>
+        </div>
+        <div>
+            <a href="{% url 'login' %}">Log keluar</a>
+        </div>
+    </form>
+</section>
+
+<script>
+    console.log(document.getElementsByName('access')[0][1].value);
+    for (let index = 0; index < document.getElementsByName('access')[0].length; index++) {
+        if (document.getElementsByName('access')[0][index].value == "") {
+            document.getElementsByName('access')[0][index].hidden = true;
+        }
+    }
+</script>
+{% endblock content %}

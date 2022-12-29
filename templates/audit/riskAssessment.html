@@ -1,0 +1,111 @@
+{% extends 'template.html' %}
+{% load static %}
+
+{% block title %} Penilaian Risiko {% endblock title %}
+
+{% block content %}
+<!-- CSS -->
+<link rel="stylesheet" href="{% static 'css/audit.css' %}">
+
+<section class="split left">
+    <div class="header">
+        <div>Selamat Datang</div>
+        <div>{{ username }} <img src="{% static 'image/assignment_ind_black_24dp.svg' %}" alt=""></div>
+    </div>
+
+    <div class="content">
+        <div class="highlight">Penilaian Risiko</div>
+        <div><a href="{% url 'praAudit' %}">Pra Audit</a></div>
+        <div><a href="{% url 'planMenu' %}">Perancangan Tahunan Audit</a></div>
+        <!-- <div><a href="{% url 'pelaksanaan' %}">Pelaksanaan Audit</a></div> -->
+        <div><a href="{% url 'inquiryMenu' %}">Pemerhatian Audit</a></div>
+        <div><a href="{% url 'responseMenu' %}">Maklumbalas Audit</a></div>
+        <div><a href="{% url 'susulanMenu' %}">Audit Susulan</a></div>
+    </div>
+
+    <div class="footer">
+        <div><a href="{% url 'access' %}">Log keluar</a></div>
+    </div>
+</section>
+
+<section class="split right">
+    <div><a href="{% url 'MEMO' %}"><img src="{% static 'image/mail_FILL0_wght400_GRAD0_opsz48.svg' %}" alt=""></a></div>
+
+    <h1>Penilaian Risiko</h1>
+
+    <form method="post" ref="form">
+        {% csrf_token %}
+        <div>Jenis Audit :</div>
+        <div>
+            <select name="type" v-model="type" ref="type" v-on:change="selectJenis">
+                {% for key in j %}
+                <option id="{{ key.code }}" value="{{ key.type }}">{{ key.type }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div>Risiko :</div>
+        <div>
+            <select name="risk" v-model="risk" ref="risk">
+                {% for key in r %}
+                <option id="{{ key.type }}" value="{{ key.risk }}">{{ key.risk }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div>Elemen Kawalan :</div>
+        <div>
+            <select name="element" v-model="element" ref="element" v-on:change="selectElemen">
+                {% for key in e %}
+                <option id="{{ key.type }}" class="{{ key.code }}" value="{{ key.element }}">{{ key.element }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div>Indikator :</div>
+        <div>
+            <select name="indicator" v-model="indicator" ref="indicator" v-on:change="selectIndicator">
+                {% for key in i %}
+                <option id="{{ key.element }}" class="{{ key.code }}" value="{{ key.indicator }}">{{ key.indicator }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div>Sub-Indikator :</div>
+        <div>
+            <select name="subIndicator" v-model="subIndicator" ref="subIndicator">
+                {% for key in s %}
+                <option id="{{ key.indicator }}" value="{{ key.subIndicator }}">{{ key.subIndicator }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div>Soalan risiko :</div>
+        <div><textarea name="question" cols="30" rows="3"></textarea></div>
+        <div>Indeks Kebarangkalian :</div>
+        <div>
+            <select name="Kebarangkalian" ref="Kebarangkalian" v-on:click="getKebarangkalian">
+                <option value="5">Hampir pasti</option>
+                <option value="4">Kemungkinan tinggi</option>
+                <option value="3">Ada kemungkinan</option>
+                <option value="2">Jarang</option>
+                <option value="1">Tiada</option>
+            </select>
+        </div>
+        <div>Indeks Impak Risiko :</div>
+        <div>
+            <select name="Impak" ref="Impak" v-on:click="getImpak">
+                <option value="5">Amat besar</option>
+                <option value="4">Sangat besar</option>
+                <option value="3">Besar</option>
+                <option value="2">Sederhana</option>
+                <option value="1">Kecil</option>
+            </select>
+        </div>
+        <div>Jumlah :</div>
+        <div><input type="text" name="total" v-model="total"></div>
+        <div>Tahap Risiko :</div>
+        <div><input type="text" name="level" v-model="level"></div>
+    </form>
+
+    <div><button type="submit" v-on:click="OnSubmit">Simpan</button></div>
+</section>
+
+<!-- Import App -->
+<script src="{% static 'javascript/audit.js' %}"></script>
+{% endblock content %}

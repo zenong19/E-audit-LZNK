@@ -1,0 +1,88 @@
+{% extends 'template.html' %}
+{% load static %}
+
+<!-- <script src="{% static 'javascript/graph.js' %}"></script> -->
+
+{% block title %} Pemerhatian Audit {% endblock title %}
+
+{% block content %}
+<!-- CSS -->
+<link rel="stylesheet" href="{% static 'css/management.css' %}">
+
+<section class="split left">
+    <div class="header">
+        <div>Selamat Datang</div>
+        <div>{{ username }} <img src="{% static 'image/assignment_ind_black_24dp.svg' %}" alt=""></div>
+    </div>
+
+    <div class="content">
+        <div class="highlight">Report</div>
+    </div>
+
+    <div class="footer">
+        <div><a href="{% url 'access' %}">Log keluar</a></div>
+    </div>
+</section>
+
+<section class="split right">
+    <div id="printer" v-on:click="print"><img src="{% static 'image/print_FILL0_wght400_GRAD0_opsz48.svg' %}" alt=""></div>
+
+    <div id="options">
+        <button>
+            <label for="mode">Laporan</label>
+        </button>
+
+
+        <select name="date" id="d" v-model="d" @change="dateSelect()">
+            <option v-for="d in date">[[ d ]]</option>
+        </select>
+
+
+
+        <select id="mode" @change="mode()" v-show="b">
+            <option value="" selected disabled hidden>Senarai Laporan</option>
+            <option value="1">Staff</option>
+            <option value="2">Jenis Audit</option>
+        </select>
+
+        <button @click="toggle" >
+            <img src = "{% static 'image/chart.svg' %}">
+        </button>
+    </div>
+
+    <div v-show="a">
+        <canvas id="myChart"></canvas>
+        <table>
+            <thead>
+                <tr>
+                    <th>Tarikh</th>
+                    <th>Jenis Audit</th>
+                    <th>Program Pengauditan</th>
+                    <th>Elemen Kawalan</th>
+                    <th>Juruaudit </th>
+                </tr>
+            </thead>
+            <tbody class="log">
+                {% for key in log %}
+                <tr id="{{ key.code }}">
+                    <td>{{ key.f }}</td>
+                    <td>{{ key.type }}</td>
+                    <td>{{ key.pengauditan }}</td>
+                    <td>{{ key.elemen }}</td>
+                    <td>{{ key.auditor }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <br>
+    
+    <!-- <canvas id="myChart" width="400" height="400"></canvas> -->
+
+</section>
+
+<script src="{% static 'javascript/graph.js' %}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<!-- Import App -->
+<script src="{% static 'javascript/management.js' %}"></script>
+{% endblock content %}

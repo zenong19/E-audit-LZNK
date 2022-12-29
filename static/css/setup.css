@@ -1,0 +1,193 @@
+.split {
+  height: 100%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+.left {
+  width: 25%;
+  left: 0;
+  background-color: #006614;
+  color: rgb(255, 255, 255);
+  overflow-y: scroll;
+}
+.left img {
+  width: 60px;
+}
+.left div {
+  font-family: "Exo", sans-serif;
+  font-size: 40px;
+}
+.left .header {
+  width: 25%;
+  position: fixed;
+  top: 10px;
+  border-bottom: 3px solid white;
+  background-color: #006614;
+}
+.left .header div {
+  display: flex;
+  justify-content: center;
+}
+.left .content {
+  display: grid;
+  justify-items: center;
+  margin: 3em 0;
+}
+.left .content div {
+  font-size: 25px;
+  margin: 10px 0;
+}
+.left .content div select {
+  font-size: 25px;
+  background-color: transparent;
+  color: rgb(255, 255, 255);
+  border: none;
+  outline: none;
+  scroll-behavior: smooth;
+}
+.left .content div select option {
+  color: black;
+}
+.left .content div a {
+  text-decoration: none;
+  color: rgb(255, 255, 255);
+}
+.left .content .highlight {
+  color: white;
+  background-color: rgb(69, 69, 69);
+  border-radius: 30px;
+  background-color: rgb(20, 204, 171);
+  padding-left: 1em;
+  padding-right: 1em;
+}
+.left .footer {
+  width: 25%;
+  position: fixed;
+  bottom: 10px;
+  background-color: #006614;
+}
+.left .footer div {
+  display: flex;
+  justify-content: center;
+}
+.left .footer div a {
+  color: white;
+  background-color: rgb(69, 69, 69);
+  border-radius: 30px;
+  text-decoration: none;
+  color: rgb(255, 255, 255);
+  font-size: 30px;
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.left::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.left {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.right {
+  width: 75%;
+  right: 0;
+  background-color: white;
+}
+.right h1 {
+  display: grid;
+  justify-items: center;
+  font-family: "Exo", sans-serif;
+  font-size: 48px;
+}
+.right form {
+  display: grid;
+  justify-items: center;
+  grid-template-columns: auto auto;
+  grid-gap: 0px 0px;
+}
+.right form div {
+  font-family: "Exo", sans-serif;
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+.right form div input {
+  background: #FFFFFF;
+  border: 1px solid #454545;
+  box-sizing: border-box;
+  border-radius: 25px;
+  text-align: center;
+  font-size: 30px;
+  width: 500px;
+  height: 40px;
+  border: 3px solid #006633;
+  box-sizing: border-box;
+  border-radius: 30px;
+}
+.right form div select {
+  background: #FFFFFF;
+  border: 1px solid #454545;
+  box-sizing: border-box;
+  border-radius: 25px;
+  font-size: 30px;
+  padding: 0 0 0 40px;
+  width: 500px;
+  height: 40px;
+  border: 3px solid #006633;
+  box-sizing: border-box;
+  border-radius: 30px;
+}
+.right form div select option {
+  text-align: center;
+}
+.right div {
+  display: grid;
+  justify-items: center;
+}
+.right div button {
+  color: white;
+  background-color: rgb(69, 69, 69);
+  border-radius: 30px;
+  font-family: "Exo", sans-serif;
+  font-size: 36px;
+  padding-left: 1em;
+  padding-right: 1em;
+}
+.right table {
+  display: grid;
+  justify-items: center;
+  font-family: "Exo", sans-serif;
+  font-size: 14px;
+  text-align: center;
+}
+.right table th, .right table td {
+  padding: 15px;
+}
+.right table tbody tr:nth-child(odd) {
+  background-color: #D6EEEE;
+}
+.right table td, .right table th {
+  width: 100px;
+}
+.right table .username {
+  width: 100px;
+}
+.right table .edit {
+  width: 50px;
+  background-color: white;
+}
+.right table .bin {
+  width: 50px;
+  background-color: #D6EEEE;
+  cursor: pointer;
+}
+.right table button:hover {
+  background-color: red;
+}/*# sourceMappingURL=setup.css.map */

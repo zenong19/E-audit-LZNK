@@ -1,0 +1,93 @@
+{% extends 'template.html' %}
+{% load static %}
+
+{% block title %} Kumpulan Audit {% endblock title %}
+
+{% block content %}
+<!-- CSS -->
+<link rel="stylesheet" href="{% static 'css/setup.css' %}">
+
+<section class="split left">
+    <div class="header">
+        <div>Selamat Datang</div>
+        <div>{{ username }} <img src="{% static 'image/assignment_ind_black_24dp.svg' %}" alt=""></div>
+    </div>
+
+    <div class="content">
+        <div><a href="{% url 'auditType' %}">Jenis Audit</a></div>
+        <div><a href="{% url 'programme' %}">Perancangan Audit</a></div>
+        <div><a href="{% url 'pengauditan' %}">Program Pengauditan</a></div>
+        <div><a href="{% url 'controlElement' %}">Elemen Kawalan</a></div>
+        <div><a href="{% url 'indicator' %}">Indikator</a></div>
+        <div><a href="{% url 'subIndicator' %}">Sub-Indikator</a></div>
+        <div><a href="{% url 'criteria' %}">Senarai Semak</a></div>
+        <div><a href="{% url 'department' %}">Jabatan Auditi</a></div>
+        <div><a href="{% url 'programme' %}">Perancangan Audit</a></div>
+        <div><a href="{% url 'outcome' %}">Penemuan Audit</a></div>
+        <div><a href="{% url 'evidence' %}">Jenis Bukti Audit</a></div>
+        <div><a href="{% url 'risk' %}">Penilaian Risiko</a></div>
+        <div class="highlight">Kumpulan Audit</div>
+        <div><a href="{% url 'history' %}">Sejarah Audit</a></div>
+    </div>
+
+    <div class="footer">
+        <div><a href="{% url 'access' %}">Log keluar</a></div>
+    </div>
+</section>
+
+<section class="split right">
+    <h1>Penetapan Pasukan Audit</h1>
+
+    <form method="post" ref="form">
+        {% csrf_token %}
+        <div>No. staf :</div>
+        <div><input type="text" name="code" id="code" v-model="code"></div>
+        <div>Nama :</div>
+        <div><input type="text" name="name" v-model="nama"></div>
+        <div>Jawatan :</div>
+        <div><input type="text" name="position" v-model="position"></div>
+        <div>Tarikh Audit :</div>
+        <div><input type="date" name="date" v-model="date"></div>
+        <div v-show="false"><input type="text" name="mode" id="mode"></div>
+    </form>
+
+    <div><button type="submit" v-on:click="checkDatabase">Simpan</button></div>
+    
+    <table>
+        <tr>
+            <td class="bin" v-on:click="reset">Reset</td>
+            <td class="bin" v-show="!a" v-on:click="toggle"><img src="{% static 'image/visibility_black_24dp.svg' %}" alt=""></td>
+            <td class="bin" v-show="a" v-on:click="toggle"><img src="{% static 'image/visibility_off_black_24dp.svg' %}" alt=""></td>
+            <td class="bin" v-show="d"><img src="{% static 'image/delete_black_24dp.svg' %}" alt="" v-on:click="OnDelete('{{ key }}','{{ value }}')"></td>
+        </tr>
+    </table>
+
+    
+        <table v-show="!a">
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>No. staf</th>
+                    <th>Nama</th>
+                    <th class="edit"></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for key in log %}
+                <tr class="kod">
+                    <td>{{ forloop.counter }}</td>
+                    <td id="{{ key.staff }}">{{ key.staff }}</td>
+                    <td>{{ key.name }}</td>
+                    <td class="edit">
+                        <button v-on:click="OnEdit_Team('{{ key.staff }}','{{ key.name }}','{{ key.position }}','{{ key.date }}')"><img src="{% static 'image/edit_black_24dp.svg' %}" alt=""></button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <br><br>
+</section>
+
+<!-- Import App -->
+<script src="{% static 'javascript/setup.js' %}"></script>
+{% endblock content %}

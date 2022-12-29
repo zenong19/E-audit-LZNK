@@ -1,0 +1,33 @@
+{% extends 'template.html' %}
+{% load static %}
+
+{% block title %} Login {% endblock title %}
+
+{% block content %}
+<!-- CSS -->
+<link rel="stylesheet" href="{% static 'css/login.css' %}">
+
+<section class="split left">
+    <div>
+        <img src="{% static 'image/Logo-Zakat-Kedah-Baru-2021.png' %}" alt="">
+    </div>
+    <div>Sistem E-Audit</div>
+</section>
+
+<section class="split right">
+    <form method="post">
+        {% csrf_token %}
+        <div>ID Pengguna :</div>
+        <div>
+            <input type="text" name="username">
+        </div>
+        <div>Kata laluan :</div>
+        <div>
+            <input type="text" name="password">
+        </div>
+        <div>
+            <button type="submit">Log masuk</button>
+        </div>
+    </form>
+</section>
+{% endblock content %}

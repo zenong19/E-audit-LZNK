@@ -1,0 +1,71 @@
+{% extends 'template.html' %}
+{% load static %}
+
+{% block title %} Perancangan Tahunan Audit {% endblock title %}
+
+{% block content %}
+<!-- CSS -->
+<link rel="stylesheet" href="{% static 'css/audit.css' %}">
+
+<section class="split left">
+    <div class="header">
+        <div>Selamat Datang</div>
+        <div>{{ username }} <img src="{% static 'image/assignment_ind_black_24dp.svg' %}" alt=""></div>
+    </div>
+
+    <div class="content">
+        <!-- <div><a href="{% url 'riskAssessment' %}">Penilaian Risiko</a></div> -->
+        <div><a href="{% url 'praAudit' %}">Pra Audit</a></div>
+        <div class="highlight">Perancangan Tahunan Audit</div>
+        <!-- <div><a href="{% url 'pelaksanaan' %}">Pelaksanaan Audit</a></div> -->
+        <div><a href="{% url 'inquiryMenu' %}">Pemerhatian Audit</a></div>
+        <div><a href="{% url 'responseMenu' %}">Maklumbalas Audit</a></div>
+        <div><a href="{% url 'susulanMenu' %}">Audit Susulan</a></div>
+    </div>
+
+    <div class="footer">
+        <div><a href="{% url 'access' %}">Log keluar</a></div>
+    </div>
+</section>
+
+<section class="split right">
+    <div><a href="{% url 'plan' %}"><img src="{% static 'image/note_add_FILL0_wght400_GRAD0_opsz48.svg' %}" alt=""></a></div>
+
+    <h1>Perancangan Tahunan Audit</h1>
+
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>Jenis Audit</th>
+                    <th>Perancangan Audit</th>
+                    <th>Jabatan Auditi</th>
+                    <th>dari</th>
+                    <th>hingga</th>
+                    <th>Status</th>
+                    <th>Kemaskini</th>
+                    <th>Pelaksanaan</th>
+                </tr>
+            </thead>
+            {% for key in log %}
+            <tbody>
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ key.type }}</td>
+                    <td>{{ key.plan }}</td>
+                    <td>{{ key.department }}</td>
+                    <td>{{ key.f }}</td>
+                    <td>{{ key.t }}</td>
+                    <td>{{ key.status }}</td>
+                    <td style="cursor: pointer;"><a href="{% url 'planEdit' key.code %}">Edit</a></td>
+                    <td style="cursor: pointer;"><a href="{% url 'pelaksanaanEdit' key.code %}">Tambah</a></td>
+                </tr>
+            </tbody>
+            {% endfor %}
+        </table>
+    </div>
+</section>
+
+<script src="{% static 'javascript/praAudit.js' %}"></script>
+{% endblock content %}

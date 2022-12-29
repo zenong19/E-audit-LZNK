@@ -1,0 +1,114 @@
+{% extends 'template.html' %}
+{% load static %}
+
+{% block title %} Perancangan Audit {% endblock title %}
+
+{% block content %}
+<!-- CSS -->
+<link rel="stylesheet" href="{% static 'css/audit.css' %}">
+
+<section class="split left">
+    <div class="header">
+        <div>Selamat Datang</div>
+        <div>{{ username }} <img src="{% static 'image/assignment_ind_black_24dp.svg' %}" alt=""></div>
+    </div>
+
+    <div class="content">
+        <!-- <div><a href="{% url 'riskAssessment' %}">Penilaian Risiko</a></div> -->
+        <div><a href="{% url 'praAudit' %}">Pra Audit</a></div>
+        <div><a href="{% url 'planMenu' %}">Perancangan Tahunan Audit</a></div>
+        <!-- <div><a href="{% url 'pelaksanaan' %}">Pelaksanaan Audit</a></div> -->
+        <div><a href="{% url 'inquiryMenu' %}">Pemerhatian Audit</a></div>
+        <div><a href="{% url 'responseMenu' %}">Maklumbalas Audit</a></div>
+        <div><a href="{% url 'susulanMenu' %}">Audit Susulan</a></div>
+    </div>
+
+    <div class="footer">
+        <div><a href="{% url 'access' %}">Log keluar</a></div>
+    </div>
+</section>
+
+<section class="split right">
+    <div><a href="{% url 'MEMO' %}"><img src="{% static 'image/mail_FILL0_wght400_GRAD0_opsz48.svg' %}" alt=""></a></div>
+    
+    <h1>Perancangan Audit</h1>
+
+    <table v-show="false">
+        {% for key in log %}
+        <tbody class="log">
+            <tr id="{{ key.code }}">
+                <td>{{ key.code }}</td>
+                <td>{{ key.plan }}</td>
+                <td>{{ key.type }}</td>
+                <td>{{ key.pengauditan }}</td>
+                <td>{{ key.indicator }}</td>
+                <td>{{ key.status }}</td>
+                <td>{{ key.department }}</td>
+                <td>{{ key.auditor }}</td>
+                <td>{{ key.f }}</td>
+                <td>{{ key.t }}</td>
+            </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+
+    <form method="post" ref="form">
+        {% csrf_token %}
+        <div>Kod :</div>
+        <div><input type="text" name="code" ref="code" value="{{ code }}" readonly></div>
+        <div>Perancangan Audit :</div>
+        <div>
+            <select name="plan" v-model="plan" ref="plan" v-on:change="selectPerancangan">
+                {% for key in pa %}
+                <option id="{{ key.code }}" class="{{ key.type }}" value="{{ key.programme }}">{{ key.programme }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div>Jenis Audit :</div>
+        <div>
+            <select name="type" v-model="type" ref="type" v-on:change="selectJenis">
+                {% for key in j %}
+                <option id="{{ key.code }}" value="{{ key.type }}">{{ key.type }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div>Program Pengauditan :</div>
+        <div>
+            <select name="pengauditan" v-model="pengauditan" ref="pengauditan" v-on:change="selectPP">
+                {% for key in p %}
+                <option class="{{ key.type }}" value="{{ key.p }}">{{ key.p }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div>Jabatan Auditi :</div>
+        <div>
+            <select name="department" v-model="department" ref="department">
+                {% for key in dept %}
+                <option id="{{ key.code }}" value="{{ key.department }}">{{ key.department }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div>Tempoh audit dari :</div>
+        <div><input type="date" name="from" v-model="from"></div>
+        <div>Tempoh audit hingga :</div>
+        <div><input type="date" name="to" v-model="to"></div>
+        <div>Status :</div>
+        <div>
+            <select name="status" id="status" v-model="s">
+                <optgroup label="Set Status">
+                    <option value="" disabled selected hidden>Set Status</option>
+                    <option value="Penangguhan">Penangguhan</option>
+                    <option value="Pembatalan">Pembatalan</option>
+                </optgroup>
+            </select>
+        </div>
+    </form>
+
+    <div><button type="submit" v-on:click="OnSubmit">Simpan</button></div>
+    <br><br>
+
+</section>
+
+<!-- Import App -->
+<script src="{% static 'javascript/audit.js' %}"></script>
+{% endblock content %}

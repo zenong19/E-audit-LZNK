@@ -1,0 +1,151 @@
+{% extends 'template.html' %}
+{% load static %}
+
+{% block title %} Pelaksanaan Audit {% endblock title %}
+
+{% block content %}
+<!-- CSS -->
+<link rel="stylesheet" href="{% static 'css/audit.css' %}">
+
+<section class="split left">
+    <div class="header">
+        <div>Selamat Datang</div>
+        <div>{{ username }} <img src="{% static 'image/assignment_ind_black_24dp.svg' %}" alt=""></div>
+    </div>
+
+    <div class="content">
+        <!-- <div><a href="{% url 'riskAssessment' %}">Penilaian Risiko</a></div> -->
+        <div><a href="{% url 'praAudit' %}">Pra Audit</a></div>
+        <div><a href="{% url 'planMenu' %}">Perancangan Tahunan Audit</a></div>
+        <!-- <div class="highlight">Pelaksanaan Audit</div> -->
+        <div><a href="{% url 'inquiryMenu' %}">Pemerhatian Audit</a></div>
+        <div><a href="{% url 'responseMenu' %}">Maklumbalas Audit</a></div>
+        <div><a href="{% url 'susulanMenu' %}">Audit Susulan</a></div>
+    </div>
+
+    <div class="footer">
+        <div><a href="{% url 'access' %}">Log keluar</a></div>
+    </div>
+</section>
+
+<section class="split right">
+    <h1>Pelaksanaan Audit</h1>
+
+    <form method="post" ref="form">
+        {% csrf_token %}
+        <div>Kod :</div>
+        <div>
+            <select name="code" ref="code" v-on:change="getData">
+                {% for key in log %}
+                <option value="{{ key.code }}">{{ key.code }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div>Perancangan Audit :</div>
+        <div><input type="text" name="plan" v-model="plan" readonly></div>
+        <div>Jenis Audit :</div>
+        <div><input type="text" name="type" v-model="type" readonly></div>
+        <div>Program Pengauditan :</div>
+        <div><input type="text" name="pengauditan" v-model="element" readonly></div>
+        <div>Elemen Kawalan :</div>
+        <div>
+            <select name="elemen" v-model="elemen" ref="elemen" v-on:change="getElemen">
+                {% for key in e %}
+                <option id="{{ key.pengauditan }}" value="{{ key.element }}">{{ key.element }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div>Juruaudit :</div>
+        <div>
+            <select name="auditor" v-model="auditor" ref="auditor">
+                {% for key in staff %}
+                <option id="{{ key.staff }}" value="{{ key.name }}">{{ key.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div>Tempoh audit dari :</div>
+        <div><input type="date" name="from" v-model="from"></div>
+        <div>Tempoh audit hingga :</div>
+        <div><input type="date" name="to" v-model="to"></div>
+        <div>Senarai Semak :</div>
+        <div>
+            <select id="senaraiSemak" v-on:click="selectKriteria">
+                {% for key in kriteria %}
+                <option value="{{ key.criteria }}">{{ key.criteria }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div v-show="false"><input type="text" name="criteria" ref="criteria" readonly></div>
+        <div v-show="false"><input type="text" name="status" ref="status" readonly></div>
+    </form>
+
+    <table style="width: 30%; margin: auto; cursor:pointer;">
+        <tr>
+            <td v-on:click="addKriteria">Tambah Data</td>
+            <td v-show="a" v-on:click="toggle">Prosedur</td>
+            <td v-show="!a" v-on:click="toggle">Prosedur</td>
+            <td v-on:click="reset">Padam</td>
+        </tr>
+    </table>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Senarai Semak</th>
+                <th>Markah</th>
+                <th>Prosedur</th>
+                <th>Ya/Tidak</th>
+            </tr>
+        </thead>
+        <tbody class="Kriteria">
+            <tr id="Kriteria 1" v-on:click="getNum(1)">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                    <input type="radio" name="status 1" id="yes" value="yes">
+                    <label for="yes">Ya</label>
+                    <input type="radio" name="status 1" id="no" value="no">
+                    <label for="no">Tidak</label>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div><button type="submit" v-on:click="getStatus">Simpan</button></div>
+    <br><br>
+
+    <table v-show="false">
+        {% for key in log %}
+        <tbody class="log">
+            <tr id="{{ key.code }}">
+                <td>{{ key.code }}</td>
+                <td>{{ key.plan }}</td>
+                <td>{{ key.type }}</td>
+                <td>{{ key.pengauditan }}</td>
+                <td>{{ key.elemen }}</td>
+                <td>{{ key.department }}</td>
+                <td>{{ key.auditor }}</td>
+                <td>{{ key.f }}</td>
+                <td>{{ key.t }}</td>
+            </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+
+    <table v-show="false">
+        {% for key in kriteria %}
+        <tbody>
+            <tr class="{{ key.criteria }}">
+                <td>{{ key.criteria }}</td>
+                <td>{{ key.mark }}</td>
+                <td>{{ key.prosedur }}</td>
+            </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+</section>
+
+<!-- Import App -->
+<script src="{% static 'javascript/audit.js' %}"></script>
+{% endblock content %}

@@ -1,0 +1,83 @@
+@import "./variable";
+
+.split {
+    height: 100%;
+    width: 50%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+.left {
+    left: 0;
+    top: 25%;
+    background-image: linear-gradient(white, $colour);
+
+    img {
+        width: 500px;
+    }
+    div {
+        font-family: $font;
+        font-size: 72px;
+        @include gridMiddle;
+    }
+}
+  
+.right {
+right: 0;
+top: 20%;
+background-color: white;
+
+div {
+    margin: 20px 0;
+    font-family: $font;
+    font-size: 48px;
+    @include gridMiddle;
+
+    input {
+        font-size: 48px;
+        width: 426px;
+        height: 56px;
+        padding-left: 1em;
+        padding-right: 1em;
+        @include inputBox;
+        text-align: center;
+    }
+
+    select {
+        @include inputBox;
+        font-size: 30px;
+        width: 300px;
+        height: 40px;
+        border: 3px solid #006633;
+        box-sizing: border-box;
+        border-radius: 30px;
+
+        option {
+            text-align: center;
+        }
+    }
+
+    button {
+        font-size: 24px;
+        padding-left: 1em;
+        padding-right: 1em;
+        @include buttonBox;
+    }
+
+    a {
+        font-size: 24px;
+        text-decoration: none;
+        padding-left: 1em;
+        padding-right: 1em;
+        @include buttonBox;
+        background-color: $colour;
+    }
+
+    kbd {
+        font-size: 24px;
+    }
+}
+}
