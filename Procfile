@@ -1,0 +1,1 @@
+web: gunicorn SMAD.wsgi --log-file -
